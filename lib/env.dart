@@ -1,0 +1,1 @@
+const String BASE_URL = 'http://ngalah.candibinangun.id/api';
