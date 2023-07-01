@@ -52,22 +52,22 @@ class ApiService extends GetConnect with BaseController {
     }
   }
 
-  Future violation() async {
-    final token = await getToken();
-    final response = await BaseClient().get(BASE_URL, '/getdata', token).catchError((error) {
-      if(error is BadRequestException) {
-        var apiError = json.decode(error.message!);
-      }else{
-        handleError(error);
-      }
-    });
-    print(response);
-    if (response != null) {
-      var violation = pelanggaranModelFromJson(response);
-      return violation.data;
-    } else {
-      return null;
-    }
-  }
+  // Future violation() async {
+  //   final token = await getToken();
+  //   final response = await BaseClient().get(BASE_URL, '/getdata', token).catchError((error) {
+  //     if(error is BadRequestException) {
+  //       var apiError = json.decode(error.message!);
+  //     }else{
+  //       handleError(error);
+  //     }
+  //   });
+  //   print(response);
+  //   if (response != null) {
+  //     var violation = violationaModelFromJson(response);
+  //     return violation.violationa;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
 }

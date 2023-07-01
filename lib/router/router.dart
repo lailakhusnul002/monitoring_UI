@@ -8,6 +8,6 @@ import 'package:monitoring_santri/router/constant.dart';
 final List<GetPage<dynamic>>? routes = [
 
   GetPage(name: loginRoute, page: () => Login()),
-   GetPage(name: pelanggaranRoute, page: () => pelanggaran()),
+   GetPage(name: pelanggaranRoute, page: () => Pelanggaran()),
 
 ];

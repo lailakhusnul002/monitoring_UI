@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:monitoring_santri/models/Pelanggaran.dart';
 import 'package:monitoring_santri/Controllers/PelanggaranController.dart';
+import 'package:monitoring_santri/models/Pelanggaran.dart';
 import 'package:monitoring_santri/peraturan%20view/index.dart';
 
-class pelanggaran extends StatefulWidget {
-  const pelanggaran({super.key});
+class Pelanggaran extends StatefulWidget {
+  const Pelanggaran({super.key});
 
   @override
-  State<pelanggaran> createState() => _pelanggaranState();
+  State<Pelanggaran> createState() => _PelanggaranState();
 }
 
-class _pelanggaranState extends State<pelanggaran> {
+class _PelanggaranState extends State<Pelanggaran> {
   final PelanggaranController pelanggaran = Get.put(PelanggaranController());
 
   @override
@@ -29,197 +27,215 @@ class _pelanggaranState extends State<pelanggaran> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-            color: Colors.black,
-            image: DecorationImage(
-                image: AssetImage('assets/bg2.png'), fit: BoxFit.cover)),
+          color: Colors.black,
+          image: DecorationImage(
+            image: AssetImage('assets/bg2.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 50, left: 15, bottom: 10),
-              child: Row(
+            Container(
+              padding: EdgeInsets.only(left: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image(image: AssetImage('assets/logoputih.png')),
-                  SizedBox(
-                    width: 5,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50, bottom: 10),
+                    child: Row(
+                      children: [
+                        Image(image: AssetImage('assets/logoputih.png')),
+                        SizedBox(width: 5),
+                        Text(
+                          'Pesantren Ngalah',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Text(
-                    'Pesantren Ngalah',
+                    'Assalamualaikum...',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'Selamat Datang di Aplikasi',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return indexPeraturan();
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 70,
+                      width: 325,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Image(image: AssetImage('assets/peraturanicon.png')),
+                          SizedBox(width: 10),
+                          Text(
+                            'Peraturan Pesantren',
+                            style: TextStyle(
+                              color: Colors.teal[700],
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            Text(
-              '   Assalamualaikum...',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '     Selamat Datang di Aplikasi',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return indexPeraturan();
-                      },
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 70,
-                  width: 325,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Image(image: AssetImage('assets/peraturanicon.png')),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Peraturan Pesantren',
-                        style: TextStyle(
-                            color: Colors.teal[700],
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 20),
             Container(
               height: 506,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      height: 400,
-                      width: 330,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5,
-                              spreadRadius: 0,
-                            ),
-                          ]),
-                      child: Obx(() {
-                        if (pelanggaran.isLoading.value) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        } else {
-                          return ListView.builder(
-                              itemCount: pelanggaran.pelanggaran!.length,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 15),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Image(
-                                                image: AssetImage(
-                                                    'assets/propil.png')),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  pelanggaran.pelanggaran[index]
-                                                      .idYayasan!,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12),
-                                                ),
-                                                Text(
-                                                  pelanggaran.pelanggaran[index]
-                                                      .createdAt!,
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 15,),
-                                        Container(
-                                          height: 2,
-                                          width: 300,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[300]
-                                          ),
-                                        ),
-                                        SizedBox(height: 10,),
-                                        Text(
-                                          pelanggaran.pelanggaran[index].name!,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        // Text(
-                                        //   pelanggaran.violation[index].jenispelanggaran!,
-                                        //   style: TextStyle(
-                                        //       color: Colors.black,
-                                        //       fontSize: 12),
-                                        // ),
-                                      ]),
-                                );
-                              });
-                        }
-                      }),
-                    ),
-                  ],
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
                 ),
+              ),
+              child: Obx(
+                () {
+                  if (pelanggaran.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: pelanggaran.pelanggaran!.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      itemBuilder: (context, index) {
+                        return _itemPelanggaran(context, index);
+                      },
+                    );
+                  }
+                },
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _itemPelanggaran(BuildContext context,int index) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+      margin: EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 1,
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 15),
+          Row(
+            children: [
+              Image(
+                image: AssetImage('assets/propil.png'),
+              ),
+              SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    pelanggaran.pelanggaran[index].idYayasan!,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    pelanggaran.pelanggaran[index].createdAt!,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 15),
+          Container(
+            height: 2,
+            width: 300,
+            decoration: BoxDecoration(color: Colors.grey[300]),
+          ),
+          SizedBox(height: 10),
+          Text(
+            pelanggaran.pelanggaran[index].name!,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+          Column(
+            children: pelanggaran.pelanggaran[index].violationa!
+                .map(
+                  (e) => _detailPelanggaran(context, e),
+                )
+                .toList(),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _detailPelanggaran(BuildContext context, Violationa e) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.06,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              
+              Text(e.pelanggaran!),
+              Text(e.jenispelanggaran!)
+            ],
+          ),
+          Text(e.hukuman!)
+        ],
       ),
     );
   }

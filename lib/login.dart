@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:monitoring_santri/Controllers/login_controller.dart';
+import 'package:monitoring_santri/convig/preference.dart';
 import 'package:monitoring_santri/models/login-response.dart';
 import 'package:monitoring_santri/pelanggaran.dart';
 import 'package:http/http.dart' as myHttp;
+import 'package:monitoring_santri/router/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
@@ -28,9 +30,17 @@ class _LoginState extends State<Login> {
   bool _isHidden = true;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    
+    _init();
+  }
+
+  void _init() async {
+    String token = await getToken();
+
+    if (token != null || token != '') {
+      Get.toNamed(pelanggaranRoute);
+    }
   }
 
   @override
@@ -119,18 +129,19 @@ class _LoginState extends State<Login> {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () async{
-                        if(email.text.isEmpty || password.text.isEmpty){
-                          setState(() {
-                            validate = true;
-                          });
-                        } else {
-                          await loginCon.loginUser(email.text, password.text);
-                        }
-                      },
+                  onTap: () async {
+                    if (email.text.isEmpty || password.text.isEmpty) {
+                      setState(() {
+                        validate = true;
+                      });
+                    } else {
+                      await loginCon.loginUser(email.text, password.text);
+                    }
+                  },
                   child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 8, left: 98),
+                      padding:
+                          const EdgeInsets.only(top: 8, bottom: 8, left: 98),
                       child: Text(
                         'Masuk',
                         style: TextStyle(
