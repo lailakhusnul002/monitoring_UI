@@ -52,7 +52,7 @@ class ApiService extends GetConnect with BaseController {
     }
   }
 
-  Future<List<Data>?> violation() async {
+  Future violation() async {
     final token = await getToken();
     final response = await BaseClient().get(BASE_URL, '/getdata', token).catchError((error) {
       if(error is BadRequestException) {

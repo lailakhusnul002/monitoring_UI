@@ -24,5 +24,15 @@ class PelanggaranController extends GetxController {
     }
   }
   
-
+void getViolationa() async {
+    try {
+      isLoading(true);
+      var res = await ApiService().violation();
+      if (res != null) {
+        violation.value = res;
+      } else {}
+    } finally {
+      isLoading(false);
+    }
+  }
 }
