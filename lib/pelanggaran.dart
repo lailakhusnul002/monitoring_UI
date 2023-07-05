@@ -112,7 +112,7 @@ class _PelanggaranState extends State<Pelanggaran> {
             ),
             SizedBox(height: 20),
             Container(
-              height: 506,
+              height: 526,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -148,94 +148,123 @@ class _PelanggaranState extends State<Pelanggaran> {
     );
   }
 
-  Widget _itemPelanggaran(BuildContext context,int index) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
-      margin: EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1,
-          color: Colors.grey,
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 15),
-          Row(
-            children: [
-              Image(
-                image: AssetImage('assets/propil.png'),
-              ),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    pelanggaran.pelanggaran[index].idYayasan!,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                  Text(
-                    pelanggaran.pelanggaran[index].createdAt!,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 15),
-          Container(
-            height: 2,
-            width: 300,
-            decoration: BoxDecoration(color: Colors.grey[300]),
-          ),
-          SizedBox(height: 10),
-          Text(
-            pelanggaran.pelanggaran[index].name!,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-            ),
-          ),
-          Column(
-            children: pelanggaran.pelanggaran[index].violationa!
-                .map(
-                  (e) => _detailPelanggaran(context, e),
-                )
-                .toList(),
-          )
-        ],
-      ),
+  Widget _itemPelanggaran(BuildContext context, int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 15),
+        // Row(
+        //   children: [
+        //     Image(
+        //       image: AssetImage('assets/propil.png'),
+        //     ),
+        //     SizedBox(width: 10),
+        //     // Column(
+        //     //   crossAxisAlignment: CrossAxisAlignment.start,
+        //     //   children: [
+        //     //     Text(
+        //     //       pelanggaran.pelanggaran[index].idYayasan!,
+        //     //       style: TextStyle(
+        //     //         color: Colors.black,
+        //     //         fontWeight: FontWeight.bold,
+        //     //         fontSize: 12,
+        //     //       ),
+        //     //     ),
+        //     //     Text(
+        //     //       pelanggaran.pelanggaran[index].createdAt!,
+        //     //       style: TextStyle(
+        //     //         color: Colors.grey,
+        //     //         fontWeight: FontWeight.bold,
+        //     //         fontSize: 12,
+        //     //       ),
+        //     //     ),
+        //     //   ],
+        //     // ),
+        //   ],
+        // ),
+        // SizedBox(height: 15),
+        // Container(
+        //   height: 2,
+        //   width: 300,
+        //   decoration: BoxDecoration(color: Colors.grey[300]),
+        // ),
+        // SizedBox(height: 10),
+        // Text(
+        //   pelanggaran.pelanggaran[index].name!,
+        //   style: TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.bold,
+        //     fontSize: 12,
+        //   ),
+        // ),
+        Column(
+          children: pelanggaran.pelanggaran[index].violationa!
+              .map(
+                (e) => _detailPelanggaran(context, e),
+              )
+              .toList(),
+        )
+      ],
     );
   }
 
   Widget _detailPelanggaran(BuildContext context, Violationa e) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.06,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.30,
+        decoration: BoxDecoration(color: Colors.white,
+        
+        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 5,
+                                            spreadRadius: 0,
+                                          ),
+                                        ]),
+        
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Pelanggaran',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    height: 25,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 255, 239, 203),
+                      
+                                        borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Center(child: Text(e.jenispelanggaran!)))
+                ],
+              ),
+              SizedBox(height: 5,),
               Text(e.pelanggaran!),
-              Text(e.jenispelanggaran!)
+               SizedBox(height: 10,),
+              Text(
+                'Hukuman',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5,),
+              Text(e.hukuman!),
+              SizedBox(height: 10,),
+              Text(
+                'Bukti Pelanggaran',
+                style: TextStyle(fontWeight: FontWeight.bold),),
+                Text(e.foto!),
+                
             ],
           ),
-          Text(e.hukuman!)
-        ],
+        ),
       ),
     );
   }
