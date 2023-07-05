@@ -73,6 +73,8 @@ class Data {
     }
   }
 
+  get pelanggaran => null;
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
