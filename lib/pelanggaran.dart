@@ -213,55 +213,93 @@ class _PelanggaranState extends State<Pelanggaran> {
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.30,
-        decoration: BoxDecoration(color: Colors.white,
-        
-        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey,
-                                            blurRadius: 5,
-                                            spreadRadius: 0,
-                                          ),
-                                        ]),
-        
+        height: MediaQuery.of(context).size.height * 0.40,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 5,
+                spreadRadius: 0,
+              ),
+            ]),
         child: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Pelanggaran',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Container(
-                    height: 25,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 239, 203),
-                      
-                                        borderRadius: BorderRadius.circular(5)
-                    ),
-                    child: Center(child: Text(e.jenispelanggaran!)))
+                      height: 25,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 255, 239, 203),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(child: Text(e.jenispelanggaran!)))
                 ],
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Text(e.pelanggaran!),
-               SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Text(
                 'Hukuman',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Text(e.hukuman!),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Text(
                 'Bukti Pelanggaran',
-                style: TextStyle(fontWeight: FontWeight.bold),),
-                Text(e.foto!),
-                
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 2,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(color: Colors.grey[300]),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Center(
+                child: Container(
+                  height: 150,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: e.foto! == null
+                          ? Image.asset(
+                              'assets/propil.png',
+                              fit: BoxFit.cover,
+                            )
+                          : Image.network(
+                              e.foto!,
+                              fit: BoxFit.cover,
+                            )),
+                ),
+              )
+              // Text(e.foto!),
             ],
           ),
         ),
