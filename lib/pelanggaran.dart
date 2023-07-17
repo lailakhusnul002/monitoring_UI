@@ -294,7 +294,7 @@ class _PelanggaranState extends State<Pelanggaran> {
                               fit: BoxFit.cover,
                             )
                           : Image.network(
-                              e.foto!,
+                              'https://ngalah.candibinangun.id'+e.foto!,
                               fit: BoxFit.cover,
                             )),
                 ),
