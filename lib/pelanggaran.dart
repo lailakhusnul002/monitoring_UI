@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:monitoring_santri/Controllers/PelanggaranController.dart';
+import 'package:monitoring_santri/login.dart';
 import 'package:monitoring_santri/models/Pelanggaran.dart';
 import 'package:monitoring_santri/peraturan%20view/index.dart';
+import 'package:monitoring_santri/profile%20view/profil.dart';
+import 'package:intl/intl.dart';
 
 class Pelanggaran extends StatefulWidget {
   const Pelanggaran({super.key});
@@ -13,6 +16,9 @@ class Pelanggaran extends StatefulWidget {
 
 class _PelanggaranState extends State<Pelanggaran> {
   final PelanggaranController pelanggaran = Get.put(PelanggaranController());
+  String searchQuery = '';
+  List<Violationa> violations = [/* List data pelanggaran asli */];
+  List<Violationa> filteredViolations = [];
 
   @override
   void initState() {
@@ -33,115 +39,203 @@ class _PelanggaranState extends State<Pelanggaran> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Container(
-              padding: EdgeInsets.only(left: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50, bottom: 10),
-                    child: Row(
-                      children: [
-                        Image(image: AssetImage('assets/logoputih.png')),
-                        SizedBox(width: 5),
-                        Text(
-                          'Pesantren Ngalah',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    'Assalamualaikum...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Selamat Datang di Aplikasi',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return indexPeraturan();
-                          },
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 70,
-                      width: 325,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Container(
+                padding: EdgeInsets.only(left: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50, bottom: 10),
                       child: Row(
                         children: [
-                          SizedBox(width: 10),
-                          Image(image: AssetImage('assets/peraturanicon.png')),
-                          SizedBox(width: 10),
+                          Image(image: AssetImage('assets/logoputih.png')),
+                          SizedBox(width: 5),
                           Text(
-                            'Peraturan Pesantren',
+                            'Pesantren Ngalah',
                             style: TextStyle(
-                              color: Colors.teal[700],
-                              fontSize: 20,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 38),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Assalamualaikum...',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return Login();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.logout_rounded,
+                                    color: Colors.white,
+                                    size: 25,
+                                  )),
+                                  Text('Log Out', style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12
+                                  ),)
+                            ],
                           )
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              height: 526,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
+                    Text(
+                      'Selamat Datang di Aplikasi',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return indexPeraturan();
+                            },
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 70,
+                        width: 330,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            Image(
+                                image: AssetImage('assets/peraturanicon.png')),
+                            SizedBox(width: 10),
+                            Text(
+                              'Peraturan Pesantren',
+                              style: TextStyle(
+                                color: Colors.teal[700],
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Obx(
-                () {
-                  if (pelanggaran.isLoading.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return ListView.builder(
-                      itemCount: pelanggaran.pelanggaran!.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      itemBuilder: (context, index) {
-                        return _itemPelanggaran(context, index);
-                      },
-                    );
-                  }
-                },
+              SizedBox(height: 28),
+              Expanded(
+                child: Container(
+                  height: 518,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                  ),
+                  child: Obx(
+                    () {
+                      if (pelanggaran.isLoading.value) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return ListView.builder(
+                          itemCount: pelanggaran.pelanggaran!.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          itemBuilder: (context, index) {
+                            return _itemPelanggaran(context, index);
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
-            ),
+            ]),
+            Padding(
+              padding: const EdgeInsets.only(top: 233, left: 15, right: 15),
+              child: Container(
+                height: 50,
+                width: 500,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            searchQuery = value;
+                            filteredViolations;
+                          });
+                        },
+                        onSubmitted: (value) {},
+                        decoration: InputDecoration(
+                          hintText: 'Cari Data...',
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 15),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    Padding(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () {
+                            filteredViolations;
+                          },
+                        ))
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -152,7 +246,7 @@ class _PelanggaranState extends State<Pelanggaran> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 15),
+        SizedBox(height:  3),
         // Row(
         //   children: [
         //     Image(
@@ -209,11 +303,14 @@ class _PelanggaranState extends State<Pelanggaran> {
   }
 
   Widget _detailPelanggaran(BuildContext context, Violationa e) {
+    String formattedDate = DateFormat('d MMM y').format(
+      DateTime.parse(e.createdAt!),
+    );
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      padding: const EdgeInsets.only(left: 7, right: 7, bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.40,
+        height: MediaQuery.of(context).size.height * 0.42,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),
@@ -281,7 +378,7 @@ class _PelanggaranState extends State<Pelanggaran> {
               Center(
                 child: Container(
                   height: 150,
-                  width: 100,
+                  width: 300,
                   decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(10),
@@ -294,7 +391,7 @@ class _PelanggaranState extends State<Pelanggaran> {
                               fit: BoxFit.cover,
                             )
                           : Image.network(
-                              'https://ngalah.candibinangun.id'+e.foto!,
+                              'https://ngalah.gosir.my.id/' + e.foto!,
                               fit: BoxFit.cover,
                             )),
                 ),
@@ -307,367 +404,3 @@ class _PelanggaranState extends State<Pelanggaran> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // body: Column(
-        //   children: [
-        //     Stack(
-        //       children: [
-        //         Container(
-        //           height: MediaQuery.of(context).size.height,
-        //           decoration: BoxDecoration(
-        //               color: Colors.black,
-        //               image: DecorationImage(
-        //                   image: AssetImage('assets/bg2.png'),
-        //                   fit: BoxFit.cover)),
-        //         ),
-        //         Column(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           mainAxisAlignment: MainAxisAlignment.start,
-        //           children: [
-        //             Row(
-        //               children: [
-        //                 Padding(
-        //                   padding: const EdgeInsets.only(left: 15, top: 50),
-        //                   child:
-        //                       Image(image: AssetImage('assets/logoputih.png')),
-        //                 ),
-        //                 SizedBox(
-        //                   width: 5,
-        //                 ),
-        //                 Padding(
-        //                   padding: const EdgeInsets.only(left: 5, top: 50),
-        //                   child: Text(
-        //                     'Pesantren Ngalah',
-        //                     style: TextStyle(
-        //                         color: Colors.white,
-        //                         fontSize: 15,
-        //                         fontWeight: FontWeight.bold),
-        //                   ),
-        //                 )
-        //               ],
-        //             ),
-        //             Padding(
-        //               padding: const EdgeInsets.only(left: 15, top: 10),
-        //               child: Text(
-        //                 'Halo Laila...',
-        //                 style: TextStyle(
-        //                     color: Colors.white,
-        //                     fontWeight: FontWeight.bold,
-        //                     fontSize: 25),
-        //               ),
-        //             ),
-        //             Padding(
-        //               padding: const EdgeInsets.only(
-        //                 left: 15,
-        //               ),
-        //               child: Text(
-        //                 'Selamat Datang di Aplikasi',
-        //                 style: TextStyle(color: Colors.white, fontSize: 15),
-        //               ),
-        //             ),
-        //             SizedBox(
-        //               height: 10,
-        //             ),
-        //             InkWell(
-        //               onTap: () {
-        //                 Navigator.of(context).push(
-        //                   MaterialPageRoute(
-        //                     builder: (context) {
-        //                       return indexPeraturan();
-        //                     },
-        //                   ),
-        //                 );
-        //               },
-        //               child: Padding(
-        //                 padding: const EdgeInsets.only(left: 15, right: 15),
-        //                 child: Container(
-        //                   height: 70,
-        //                   width: 500,
-        //                   decoration: BoxDecoration(
-        //                       color: Colors.white,
-        //                       borderRadius: BorderRadius.circular(10)),
-        //                   child: Row(
-        //                     children: [
-        //                       SizedBox(
-        //                         width: 10,
-        //                       ),
-        //                       Image(
-        //                           image:
-        //                               AssetImage('assets/peraturanicon.png')),
-        //                       SizedBox(
-        //                         width: 10,
-        //                       ),
-        //                       Text(
-        //                         'Peraturan Pesantren',
-        //                         style: TextStyle(
-        //                             color: Colors.teal[700],
-        //                             fontSize: 20,
-        //                             fontWeight: FontWeight.bold),
-        //                       )
-        //                     ],
-        //                   ),
-        //                 ),
-        //               ),
-        //             ),
-        //             SizedBox(
-        //               height: 36,
-        //             ),
-        //             Container(
-        //               height: 502,
-        //               width: MediaQuery.of(context).size.width,
-        //               decoration: BoxDecoration(
-        //                   color: Colors.white,
-        //                   borderRadius: BorderRadius.only(
-        //                       topLeft: Radius.circular(15),
-        //                       topRight: Radius.circular(15))),
-        //               child: SingleChildScrollView(
-        //                 child: Column(
-        //                   children: [
-        //                     Padding(
-        //                       padding: const EdgeInsets.only( left: 15, right: 15, top: 70),
-        //                       child: Obx(() {
-        //                         if (pelanggaran.isLoading.value) {
-        //                           return const Center(child: CircularProgressIndicator());
-        //                         } else {
-        //                           return ListView.builder(
-        //                           itemCount: pelanggaran.pelanggaran!.length,
-        //                           shrinkWrap: true,
-        //                           scrollDirection: Axis.horizontal, 
-        //                           itemBuilder: (context, index) {
-        //                         return Container(
-        //                             height: 400,
-        //                             width: 500,
-        //                             decoration: BoxDecoration(
-        //                                 color: Colors.white,
-        //                                 borderRadius: BorderRadius.circular(5),
-        //                                 boxShadow: [
-        //                                   BoxShadow(
-        //                                     color: Colors.grey,
-        //                                     blurRadius: 5,
-        //                                     spreadRadius: 0,
-        //                                   ),
-        //                                 ]),
-        //                                 child: Column(
-        //                                     crossAxisAlignment: CrossAxisAlignment.start,
-        //                                     children: [
-        //                                       Row(
-        //                                         children: [
-        //                                           Padding(
-        //                                             padding: const EdgeInsets.only(
-        //                                                 top: 10, left: 10),
-        //                                             child: Image(
-        //                                               image: AssetImage(
-        //                                                 'assets/propil.png',
-        //                                               ),
-        //                                             ),
-        //                                           ),
-        //                                           Padding(
-        //                                             padding: const EdgeInsets.only(
-        //                                                 left: 10, top: 10),
-        //                                             child: Column(
-        //                                               crossAxisAlignment:
-        //                                                   CrossAxisAlignment.start,
-        //                                               children: [
-        //                                                 Text(
-        //                                                   pelanggaran.pelanggaran[index].idYayasan!,
-        //                                                   style: TextStyle(
-        //                                                       color: Colors.black,
-        //                                                       fontWeight: FontWeight.bold,
-        //                                                       fontSize: 12),
-        //                                                 ),
-        //                                                 Text(
-        //                                                  pelanggaran.pelanggaran[index].createdAt!,
-        //                                                   style: TextStyle(
-        //                                                       color: Colors.grey,
-        //                                                       fontWeight: FontWeight.bold,
-        //                                                       fontSize: 12),
-        //                                                 )
-        //                                               ],
-        //                                             ),
-        //                                           )
-        //                                         ],
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.all(10),
-        //                                         child: Container(
-        //                                           height: 2,
-        //                                           width: 400,
-        //                                           decoration: BoxDecoration(
-        //                                               color: Colors.grey[300]),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(
-        //                                           left: 18,
-        //                                         ),
-        //                                         child: Text(
-        //                                           pelanggaran.pelanggaran[index].name!,
-        //                                           style: TextStyle(
-        //                                               color: Colors.black,
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(left: 18),
-        //                                         child: Text(
-        //                                           'Pelanggaran Santri',
-        //                                           style: TextStyle(
-        //                                               color: Colors.black, fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(
-        //                                             left: 18, top: 10),
-        //                                         child: Text(
-        //                                           'Kategori Pelanggaran:',
-        //                                           style: TextStyle(
-        //                                               color: Colors.grey,
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(left: 18),
-        //                                         child: Text(
-        //                                           'Ringan',
-        //                                           style: TextStyle(
-        //                                               color: Colors.black, fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(
-        //                                             left: 18, top: 10),
-        //                                         child: Text(
-        //                                           'Hukuman:',
-        //                                           style: TextStyle(
-        //                                               color: Colors.grey,
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(left: 18),
-        //                                         child: Text(
-        //                                           'Hukuman Santri',
-        //                                           style: TextStyle(
-        //                                               color: Colors.black, fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.only(
-        //                                             left: 18, top: 10),
-        //                                         child: Text(
-        //                                           'Bukti:',
-        //                                           style: TextStyle(
-        //                                               color: Colors.grey,
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: 12),
-        //                                         ),
-        //                                       ),
-        //                                       Padding(
-        //                                         padding: const EdgeInsets.all(10),
-        //                                         child: Container(
-        //                                           height: 150,
-        //                                           width: 400,
-        //                                           decoration: BoxDecoration(
-        //                                               color: Colors.grey[300],
-        //                                               borderRadius:
-        //                                                   BorderRadius.circular(5)),
-        //                                         ),
-                                                
-        //                                       ),
-        //                                     ],
-        //                                   ),
-                                          
-        //                           );
-        //                         },
-                                   
-        //                         );
-        //                         }
-        //                       }
-                              
-        //                       ),
-        //                     ),
-                            
-        //                   ],
-                          
-        //                 ),
-                        
-        //               ),
-        //             )
-        //           ],
-        //         ),
-                
-        //         Padding(
-        //           padding: const EdgeInsets.only(top: 310, left: 15, right: 15),
-        //           child: Container(
-        //             height: 20,
-        //             width: 500,
-        //             decoration: BoxDecoration(
-        //                 color: Colors.teal[800],
-        //                 borderRadius: BorderRadius.circular(50)),
-        //             child: Center(
-        //               child: Text(
-        //                 'Data Pelanggaran',
-        //                 style: TextStyle(
-        //                     color: Colors.white,
-        //                     fontSize: 12,
-        //                     fontWeight: FontWeight.bold),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: const EdgeInsets.only(top: 245, left: 15, right: 15),
-        //           child: Container(
-        //             height: 50,
-        //             width: 500,
-        //             decoration: BoxDecoration(
-        //               color: Colors.white,
-        //               borderRadius: BorderRadius.circular(10),
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   color: Colors.grey,
-        //                   blurRadius: 5,
-        //                   spreadRadius: 0,
-        //                 ),
-        //               ],
-        //             ),
-        //             child: Row(
-        //               children: [
-        //                 SizedBox(
-        //                   width: 10,
-        //                 ),
-        //                 Text(
-        //                   'Cari Data...',
-        //                   style: TextStyle(color: Colors.grey, fontSize: 15),
-        //                 ),
-        //                 SizedBox(
-        //                   width: 200,
-        //                 ),
-        //                 Icon(Icons.search)
-        //               ],
-        //             ),
-        //           ),
-        //         )
-        //       ],
-        //     )
-        //   ],
-        // ),

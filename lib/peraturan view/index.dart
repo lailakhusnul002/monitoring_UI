@@ -39,12 +39,12 @@ class _indexPeraturanState extends State<indexPeraturan> {
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: Colors.white,
-                          size: 40,
+                          size: 30,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 10),
+                      padding: const EdgeInsets.only(top: 40, left: 5),
                       child: Image(image: AssetImage('assets/logoputih.png')),
                     ),
                     Padding(
@@ -79,289 +79,292 @@ class _indexPeraturanState extends State<indexPeraturan> {
                 SizedBox(
                   height: 45,
                 ),
-                Container(
-                  height: 580,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 40, left: 20, right: 20),
-                        child: Container(
+                Expanded(
+                  child: Container(
+                    height: 580,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 30, left: 20, right: 20),
+                          child: Container(
                           height: 20,
-                          width: 400,
+                          width: 500,
                           decoration: BoxDecoration(
-                              color: Colors.teal[900],
-                              borderRadius: BorderRadius.circular(10)),
+                              color: Colors.teal[800],
+                              borderRadius: BorderRadius.circular(50)),
                           child: Center(
                             child: Text(
                               'Detail Peraturan',
                               style: TextStyle(
                                   color: Colors.white,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 5, left: 20, right: 20),
-                        child: Container(
-                          height: 110,
-                          width: 400,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                          color: Colors.yellow[500],
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 20),
-                                      child: Text(
-                                        'Pelanggaran Ringan',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 5, left: 20, right: 20),
+                          child: Container(
+                            height: 110,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 5,
+                                  spreadRadius: 0,
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(top: 75, left: 6),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return pelanggaranRingan();
-                                            },
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 25,
-                                        width: 80,
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 50,
+                                        width: 50,
                                         decoration: BoxDecoration(
-                                            color: Colors.green[900],
+                                            color: Colors.yellow[500],
                                             borderRadius:
-                                                BorderRadius.circular(2)),
-                                        child: Center(
-                                          child: Text(
-                                            'Lihat Detail',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
+                                                BorderRadius.circular(50)),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 15, left: 20),
+                                        child: Text(
+                                          'Pelanggaran Ringan',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(top: 75, left: 6),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return pelanggaranRingan();
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              color: Colors.teal[800],
+                                              borderRadius:
+                                                  BorderRadius.circular(2)),
+                                          child: Center(
+                                            child: Text(
+                                              'Lihat Detail',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 10, left: 20, right: 20),
-                        child: Container(
-                          height: 110,
-                          width: 400,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                          color: Colors.orange[200],
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 20),
-                                      child: Text(
-                                        'Pelanggaran Sedang',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
                                     )
                                   ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 10, left: 20, right: 20),
+                          child: Container(
+                            height: 110,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 5,
+                                  spreadRadius: 0,
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 75,
-                                    ),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return pelanggaranSedang();
-                                            },
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 25,
-                                        width: 80,
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 50,
+                                        width: 50,
                                         decoration: BoxDecoration(
-                                            color: Colors.green[900],
+                                            color: Colors.orange[200],
                                             borderRadius:
-                                                BorderRadius.circular(2)),
-                                        child: Center(
-                                          child: Text(
-                                            'Lihat Detail',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
+                                                BorderRadius.circular(50)),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 15, left: 20),
+                                        child: Text(
+                                          'Pelanggaran Sedang',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 75,
+                                      ),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return pelanggaranSedang();
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              color: Colors.teal[800],
+                                              borderRadius:
+                                                  BorderRadius.circular(2)),
+                                          child: Center(
+                                            child: Text(
+                                              'Lihat Detail',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 10, left: 20, right: 20),
-                        child: Container(
-                          height: 110,
-                          width: 400,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                          color: Colors.red[200],
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 20),
-                                      child: Text(
-                                        'Pelanggaran Berat',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
                                     )
                                   ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 10, left: 20, right: 20),
+                          child: Container(
+                            height: 110,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 5,
+                                  spreadRadius: 0,
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 75, left: 20),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return pelanggaranBerat();
-                                            },
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 25,
-                                        width: 80,
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 50,
+                                        width: 50,
                                         decoration: BoxDecoration(
-                                            color: Colors.green[900],
+                                            color: Colors.red[200],
                                             borderRadius:
-                                                BorderRadius.circular(2)),
-                                        child: Center(
-                                          child: Text(
-                                            'Lihat Detail',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
+                                                BorderRadius.circular(50)),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 15, left: 20),
+                                        child: Text(
+                                          'Pelanggaran Berat',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 75, left: 20),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return pelanggaranBerat();
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              color: Colors.teal[800],
+                                              borderRadius:
+                                                  BorderRadius.circular(2)),
+                                          child: Center(
+                                            child: Text(
+                                              'Lihat Detail',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

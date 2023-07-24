@@ -40,6 +40,7 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.1.2
   search_page: ^2.3.0
+  intl: ^0.17.0
  
 
 dev_dependencies:
@@ -73,6 +74,7 @@ flutter:
     - assets/logoputih.png
     - assets/peraturanicon.png
     - assets/propil.png
+    - assets/profil.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
